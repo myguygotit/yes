@@ -97,6 +97,7 @@
             background-color: var(--accent-color);
             transform-origin: bottom right;
             transition: transform 0.3s ease-out;
+            will-change: transform;
         }
 
         .info-section a:hover::after {
@@ -116,6 +117,7 @@
             border: 1px solid var(--border-color);
             opacity: 0; /* Start hidden */
             animation: slideInUp 0.8s ease-out 0.2s forwards;
+            will-change: transform, opacity;
         }
         
         /* --- Left Column (Aside) --- */
@@ -138,6 +140,7 @@
             object-fit: cover;
             transition: transform 0.4s ease;
             animation: pulsate 2.5s infinite ease-in-out;
+            will-change: transform;
         }
         
         .profile-pic:hover {
@@ -164,6 +167,16 @@
             letter-spacing: 1.5px;
             opacity: 0;
             animation: slideInUp 0.6s ease-out 0.5s forwards;
+            will-change: transform, opacity;
+        }
+        
+        .left-column h3 a {
+            color: inherit;
+            text-decoration: none;
+            transition: text-shadow 0.3s ease;
+        }
+        .left-column h3 a:hover {
+            text-shadow: 0 0 8px rgba(56, 189, 248, 0.7);
         }
 
         .info-section {
@@ -172,6 +185,7 @@
             text-align: left;
             opacity: 0;
             animation: slideInUp 0.6s ease-out forwards;
+            will-change: transform, opacity;
         }
         
         .left-column .info-section:nth-of-type(1) { animation-delay: 0.6s; }
@@ -234,6 +248,7 @@
             transition: background-color 0.3s ease, transform 0.3s ease, box-shadow 0.3s ease;
             opacity: 0;
             animation: slideInUp 0.5s ease-out forwards;
+            will-change: transform, opacity, box-shadow;
         }
 
         /* Staggered animation for skills */
@@ -252,6 +267,10 @@
             transform: translateY(-5px);
             box-shadow: 0 5px 15px rgba(56, 189, 248, 0.2);
         }
+        
+        .skills-list li:active {
+            transform: translateY(-2px) scale(0.98);
+        }
 
         /* --- Right Column (Main Content) --- */
         .right-column {
@@ -269,20 +288,31 @@
             display: flex;
             align-items: center;
         }
+
+        .right-column h2 a {
+            color: inherit;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            transition: color 0.3s ease;
+        }
+         .right-column h2 a:hover {
+            color: #7dd3fc;
+        }
         
         .right-column h2 i {
             margin-right: 15px;
-            transition: transform 0.3s ease, color 0.3s ease;
+            transition: transform 0.3s ease;
         }
 
         .right-column .content-block:hover h2 i {
              transform: scale(1.1) rotate(10deg);
-             color: #7dd3fc;
         }
         
         .content-block {
             margin-bottom: 35px;
             opacity: 0;
+            will-change: transform, opacity;
         }
         
         /* Varied animations for content blocks */
@@ -313,6 +343,7 @@
             transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
             border-radius: 8px;
             padding: 10px;
+            will-change: transform, box-shadow;
         }
         
         .right-column .content-block:nth-of-type(2) li {
@@ -325,6 +356,12 @@
             transform: translateY(-5px) scale(1.02);
             background-color: var(--card-bg);
             box-shadow: 0 8px 20px rgba(0,0,0,0.4);
+        }
+
+        .right-column .content-block:nth-of-type(3) ul li:active {
+            transform: translateY(-2px) scale(0.99);
+            background-color: var(--card-bg);
+            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
         
         .content-block ul li p {
@@ -347,6 +384,16 @@
             }
             .left-column h1 { font-size: 2em; }
             .right-column h2 { font-size: 1.4em; }
+
+            /* Faster animation delays for mobile */
+            .skills-list li:nth-child(1) { animation-delay: 0.7s; }
+            .skills-list li:nth-child(2) { animation-delay: 0.75s; }
+            .skills-list li:nth-child(3) { animation-delay: 0.8s; }
+            .skills-list li:nth-child(4) { animation-delay: 0.85s; }
+            .skills-list li:nth-child(5) { animation-delay: 0.9s; }
+            .skills-list li:nth-child(6) { animation-delay: 0.95s; }
+            .skills-list li:nth-child(7) { animation-delay: 1.0s; }
+            .skills-list li:nth-child(8) { animation-delay: 1.05s; }
         }
     </style>
 </head>
@@ -359,7 +406,9 @@
             
             <header>
                 <h1>Myguy_gotit</h1>
-                <h3>Roblox Developer</h3>
+                <h3>
+                    <a href="https://www.roblox.com/users/2641373273/profile" target="_blank" rel="noopener noreferrer">Roblox Developer</a>
+                </h3>
             </header>
 
             <section class="info-section">
@@ -387,7 +436,11 @@
         <main class="right-column">
 
             <section class="content-block">
-                <h2><i class="fa-solid fa-user"></i>Profile</h2>
+                <h2>
+                    <a href="https://www.roblox.com/users/2641373273/profile" target="_blank" rel="noopener noreferrer">
+                        <i class="fa-solid fa-user"></i>Profile
+                    </a>
+                </h2>
                 <p>
                     Yes
                 </p>
