@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // --- CONFIGURATION ---
     // To disable the language switcher, change this value to false
-    const languageFeatureEnabled = false;
+    const languageFeatureEnabled = true;
 
     // --- 1. PRELOADER ---
     const preloader = document.querySelector('.preloader');
@@ -114,4 +114,3 @@ document.addEventListener('DOMContentLoaded', function() {
         backToTopButton.classList.toggle('visible', window.scrollY > 300);
     });
 });
-
