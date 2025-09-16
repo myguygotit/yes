@@ -12,7 +12,8 @@ document.addEventListener('DOMContentLoaded', function() {
     menuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
     });
-    document.querySelectorAll('#nav-links a:not(.lang-btn)').forEach(link => {
+    // Close mobile menu when a text link is clicked
+    document.querySelectorAll('#nav-links a:not([data-lang])').forEach(link => {
         link.addEventListener('click', () => {
             if (navLinks.classList.contains('active')) {
                 navLinks.classList.remove('active');
@@ -20,15 +21,11 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
 
-    // --- 3. SCROLL-IN ANIMATIONS WITH STAGGER ---
+    // --- 3. SCROLL-IN ANIMATIONS ---
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                const gridItems = entry.target.querySelectorAll('.card.hidden');
-                gridItems.forEach((item, index) => {
-                    item.style.transitionDelay = `${index * 100}ms`;
-                });
             }
         });
     }, { threshold: 0.1 });
@@ -40,17 +37,40 @@ document.addEventListener('DOMContentLoaded', function() {
         backToTopButton.classList.toggle('visible', window.scrollY > 300);
     });
 
-    // --- 5. LANGUAGE SWITCHER LOGIC ---
-    const langButtons = document.querySelectorAll('.lang-btn');
+    // --- 5. THEME (NIGHT MODE) SWITCHER ---
+    const themeSwitch = document.getElementById('theme-switch');
+    const langToggleCheckbox = document.getElementById('lang-toggle');
+
+    // Function to set the theme
+    const setTheme = (theme) => {
+        document.body.setAttribute('data-theme', theme);
+        localStorage.setItem('theme', theme);
+    };
+
+    // Event listener for the theme switch button
+    themeSwitch.addEventListener('click', () => {
+        const currentTheme = document.body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+        setTheme(newTheme);
+    });
+
+    // On page load, check for saved theme or system preference
+    const savedTheme = localStorage.getItem('theme');
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    if (savedTheme) {
+        setTheme(savedTheme);
+    } else if (prefersDark) {
+        setTheme('dark');
+    }
+
+    // --- 6. LANGUAGE SWITCHER LOGIC ---
     const translatableElements = document.querySelectorAll('[data-lang-en]');
 
     const setLanguage = (lang) => {
         // Fade out all elements
-        translatableElements.forEach(el => {
-            el.style.opacity = '0';
-        });
+        translatableElements.forEach(el => { el.style.opacity = '0'; });
         
-        // Wait for the fade-out to finish, then change text and fade in
+        // Wait for fade-out, then change text and fade in
         setTimeout(() => {
             translatableElements.forEach(el => {
                 const key = 'lang' + lang.charAt(0).toUpperCase() + lang.slice(1);
@@ -62,30 +82,17 @@ document.addEventListener('DOMContentLoaded', function() {
         }, 200);
 
         localStorage.setItem('language', lang);
-        
-        langButtons.forEach(btn => {
-            btn.classList.toggle('active', btn.dataset.lang === lang);
-        });
+        langToggleCheckbox.checked = (lang === 'kh');
     };
 
-    langButtons.forEach(button => {
-        button.addEventListener('click', (e) => {
-            e.preventDefault();
-            if (!button.classList.contains('active')) {
-                setLanguage(button.dataset.lang);
-            }
-        });
+    // Event listener for the language toggle checkbox
+    langToggleCheckbox.addEventListener('change', () => {
+        const newLang = langToggleCheckbox.checked ? 'kh' : 'en';
+        setLanguage(newLang);
     });
 
-    // On page load, check for saved language and set it without animation
+    // On page load, check for saved language
     const savedLang = localStorage.getItem('language') || 'en';
-    translatableElements.forEach(el => {
-        const key = 'lang' + savedLang.charAt(0).toUpperCase() + savedLang.slice(1);
-        if (el.dataset[key]) {
-            el.innerText = el.dataset[key];
-        }
-    });
-    langButtons.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.lang === savedLang);
-    });
+    setLanguage(savedLang);
+
 });
