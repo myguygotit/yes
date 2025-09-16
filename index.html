@@ -39,10 +39,19 @@
                 <li><a href="#divisions" data-lang-en="Divisions" data-lang-kh="ផ្នែក">Divisions</a></li>
                 <li><a href="#staff" data-lang-en="Command" data-lang-kh="បញ្ជាការ">Command</a></li>
                 <li><a href="#contact" data-lang-en="Contact" data-lang-kh="ទំនាក់ទំនង">Contact</a></li>
-                <li class="lang-switcher">
-                    <a class="lang-btn active" data-lang="en">EN</a>
-                    <span>|</span>
-                    <a class="lang-btn" data-lang="kh">KH</a>
+                <li class="controls-wrapper">
+                    <div class="lang-switch">
+                        <div class="lang-switch-label" data-lang-en="EN" data-lang-kh="EN">EN</div>
+                        <div class="lang-toggle-container">
+                            <input type="checkbox" id="lang-toggle" class="lang-toggle-checkbox">
+                            <label for="lang-toggle" class="lang-toggle-label"></label>
+                        </div>
+                        <div class="lang-switch-label" data-lang-en="KH" data-lang-kh="KH">KH</div>
+                    </div>
+                    <button class="theme-switch" id="theme-switch" aria-label="Toggle dark mode">
+                        <i class="fas fa-sun"></i>
+                        <i class="fas fa-moon"></i>
+                    </button>
                 </li>
             </ul>
         </div>
@@ -85,7 +94,7 @@
             </div>
         </section>
 
-        <section id="join" style="background-color: #fff;">
+        <section id="join" class="alt-bg">
             <div class="container">
                 <h2 class="hidden" data-lang-en="Recruitment Process" data-lang-kh="ដំណើរការជ្រើសរើស">Recruitment Process</h2>
                 <div class="grid grid-3-col">
@@ -115,49 +124,49 @@
                     <div class="card division-card hidden">
                         <div class="division-image-wrapper">
                             <img src="https://media.discordapp.net/attachments/1359163482876022785/1401588668631879741/Screenshot_2025-08-03_220649.png?ex=68ca2bea&is=68c8da6a&hm=6f727ee643c337b5fc8779949a44286e9773270a112458641b334be7530df3c3&=&format=webp&quality=lossless&width=1768&height=729" alt="Royal Gendarmerie of Cambodia">
-                            <div class="division-overlay"><i class="fas fa-search-plus"></i></div>
+                            <div class="division-overlay"></div>
                         </div>
                         <div class="division-card-content"><h4 data-lang-en="Royal Gendarmerie of Cambodia" data-lang-kh="កងរាជអាវុធហត្ថកម្ពុជា">Royal Gendarmerie of Cambodia</h4><p data-lang-en="A military police force with both civil and military duties." data-lang-kh="[មាតិកាជាភាសាខ្មែរ]">A military police force with both civil and military duties.</p></div>
                     </div>
                     <div class="card division-card hidden">
                          <div class="division-image-wrapper">
                             <img src="https://cdn.discordapp.com/attachments/1359163482876022785/1408481377887719476/Screenshot_246.png?ex=68ca32c0&is=68c8e140&hm=040c47a23f0199ec42dbea2e2e613bed564b4dc3d2a82b9b6c3b2de100683573&" alt="Bodyguard Headquarters">
-                             <div class="division-overlay"><i class="fas fa-search-plus"></i></div>
+                             <div class="division-overlay"></div>
                         </div>
                         <div class="division-card-content"><h4 data-lang-en="Bodyguard Headquarters" data-lang-kh="ទីបញ្ជាការដ្ឋានអង្គរក្ស">Bodyguard Headquarters</h4><p data-lang-en="An elite unit responsible for high-level personal security." data-lang-kh="[មាតិកាជាភាសាខ្មែរ]">An elite unit responsible for high-level personal security.</p></div>
                     </div>
                     <div class="card division-card hidden">
                          <div class="division-image-wrapper">
                             <img src="https://cdn.discordapp.com/attachments/1359163482876022785/1402118673597989014/Screenshot_2025-08-05_at_2.30.00_AM.png?ex=68ca1f45&is=68c8cdc5&hm=91523bc8952ca428aa6f9a4d4bff5f91c261e501e8c5d6ad6929f7fe53896dc1&" alt="Brigade 70">
-                             <div class="division-overlay"><i class="fas fa-search-plus"></i></div>
+                             <div class="division-overlay"></div>
                         </div>
                         <div class="division-card-content"><h4 data-lang-en="Brigade 70" data-lang-kh="កងពលតូចលេខ៧០">Brigade 70</h4><p data-lang-en="A specialized infantry brigade known for its versatility." data-lang-kh="[មាតិកាជាភាសាខ្មែរ]">A specialized infantry brigade known for its versatility.</p></div>
                     </div>
                     <div class="card division-card hidden">
                          <div class="division-image-wrapper">
                             <img src="https://cdn.discordapp.com/attachments/1359167427564273818/1409677086079188992/IMG_0140.png?ex=68c9ef17&is=68c89d97&hm=1a3c046db5278d42a7ca7858f5e83c97ef18886852ca6ced93b1435da9fe98c5&" alt="911th Special Force">
-                             <div class="division-overlay"><i class="fas fa-search-plus"></i></div>
+                             <div class="division-overlay"></div>
                         </div>
                         <div class="division-card-content"><h4 data-lang-en="911th Special Force" data-lang-kh="កងកម្លាំងពិសេស៩១១">911th Special Force</h4><p data-lang-en="Conducts high-stakes special operations in any environment." data-lang-kh="[មាតិកាជាភាសាខ្មែរ]">Conducts high-stakes special operations in any environment.</p></div>
                     </div>
                     <div class="card division-card hidden">
                          <div class="division-image-wrapper">
                             <img src="https://cdn.discordapp.com/attachments/1359167427564273818/1406909782207496233/3adRCAF.png?ex=68c9c117&is=68c86f97&hm=9916142ad5868f58b95b80fbb2a442c960572a5d7001b9de8392d7f9a4f566db&" alt="3rd Army Division">
-                             <div class="division-overlay"><i class="fas fa-search-plus"></i></div>
+                             <div class="division-overlay"></div>
                         </div>
                         <div class="division-card-content"><h4 data-lang-en="3rd Army Division" data-lang-kh="កងពលធំទី៣">3rd Army Division</h4><p data-lang-en="A primary ground force, forming the backbone of the army." data-lang-kh="[មាតិកាជាភាសាខ្មែរ]">A primary ground force, forming the backbone of the army.</p></div>
                     </div>
                     <div class="card division-card hidden">
                          <div class="division-image-wrapper">
                             <img src="https://cdn.discordapp.com/attachments/1359163482876022785/1380214913603080362/RobloxScreenShot20250605_220659793.png?ex=68ca328e&is=68c8e10e&hm=cd4488b86e21098da4b71543f931e20209c441b47eb568df6e2a82507eff2c1a&" alt="Royal Cambodian Air Force">
-                             <div class="division-overlay"><i class="fas fa-search-plus"></i></div>
+                             <div class="division-overlay"></div>
                         </div>
                         <div class="division-card-content"><h4 data-lang-en="Royal Cambodian Air Force" data-lang-kh="កងទ័ពអាកាស Hoàng gia កម្ពុជា">Royal Cambodian Air Force</h4><p data-lang-en="Responsible for air superiority and transport operations." data-lang-kh="[មាតិកាជាភាសាខ្មែរ]">Responsible for air superiority and transport operations.</p></div>
                     </div>
                     <div class="card division-card hidden">
                          <div class="division-image-wrapper">
                             <img src="https://cdn.discordapp.com/attachments/1359167427564273818/1413962394899710063/FA.png?ex=68c9b419&is=68c86299&hm=db2a2b8e7ccbe36d526260db9247aebec3542e42d0d38c1ecfb6448a02ee1848&" alt="Ministry of Foreign Affairs">
-                             <div class="division-overlay"><i class="fas fa-search-plus"></i></div>
+                             <div class="division-overlay"></div>
                         </div>
                         <div class="division-card-content"><h4 data-lang-en="Ministry of Foreign Affairs" data-lang-kh="ក្រសួងការបរទេស">Ministry of Foreign Affairs</h4><p data-lang-en="Manages diplomatic relations and partnerships with allied communities." data-lang-kh="[មាតិកាជាភាសាខ្មែរ]">Manages diplomatic relations and partnerships with allied communities.</p></div>
                     </div>
@@ -165,7 +174,7 @@
             </div>
         </section>
         
-        <section id="staff" style="background-color: #fff;">
+        <section id="staff" class="alt-bg">
             <div class="container">
                 <h2 class="hidden" data-lang-en="Command Staff" data-lang-kh="បុគ្គលិកបញ្ជាការ">Command Staff</h2>
                 <div class="grid grid-2-col">
