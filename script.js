@@ -1,12 +1,9 @@
-// Wait until the entire HTML document is loaded before running the script
 document.addEventListener('DOMContentLoaded', function() {
 
     // --- 1. PRELOADER ---
     const preloader = document.querySelector('.preloader');
     window.addEventListener('load', () => {
         preloader.classList.add('loaded');
-        // Trigger the hero text animation after the preloader fades
-        setTimeout(animateHeroHeadline, 500);
     });
 
     // --- 2. MOBILE MENU ---
@@ -15,51 +12,80 @@ document.addEventListener('DOMContentLoaded', function() {
     menuToggle.addEventListener('click', () => {
         navLinks.classList.toggle('active');
     });
-    
-    // --- 3. ANIMATED HERO HEADLINE ---
-    function animateHeroHeadline() {
-        const headline = document.getElementById('hero-headline');
-        if (!headline) return; // Exit if headline isn't found
-        const text = headline.textContent;
-        headline.innerHTML = ''; // Clear original text
-        
-        text.split('').forEach((char, index) => {
-            const charSpan = document.createElement('span');
-            charSpan.className = 'char';
-            // Use non-breaking space for empty spaces to ensure they animate
-            charSpan.innerHTML = (char === ' ') ? '&nbsp;' : char;
-            charSpan.style.transitionDelay = `${index * 30}ms`;
-            headline.appendChild(charSpan);
+    document.querySelectorAll('#nav-links a:not(.lang-btn)').forEach(link => {
+        link.addEventListener('click', () => {
+            if (navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+            }
         });
+    });
 
-        // Add a small delay before triggering the animation
-        setTimeout(() => {
-            headline.querySelectorAll('.char').forEach(span => {
-                span.style.transform = 'translateY(0)';
-            });
-        }, 100);
-    }
-
-    // --- 4. SCROLL-IN ANIMATIONS ---
+    // --- 3. SCROLL-IN ANIMATIONS WITH STAGGER ---
     const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('visible');
-                // Stagger animation for grid children
-                const gridItems = entry.target.querySelectorAll('.card');
+                const gridItems = entry.target.querySelectorAll('.card.hidden');
                 gridItems.forEach((item, index) => {
                     item.style.transitionDelay = `${index * 100}ms`;
                 });
             }
         });
     }, { threshold: 0.1 });
-
     document.querySelectorAll('.hidden').forEach((el) => observer.observe(el));
-    document.querySelectorAll('.grid').forEach((el) => observer.observe(el));
-
-    // --- 5. BACK TO TOP BUTTON ---
+    
+    // --- 4. BACK TO TOP BUTTON ---
     const backToTopButton = document.querySelector('.back-to-top');
     window.addEventListener('scroll', () => {
         backToTopButton.classList.toggle('visible', window.scrollY > 300);
+    });
+
+    // --- 5. LANGUAGE SWITCHER LOGIC ---
+    const langButtons = document.querySelectorAll('.lang-btn');
+    const translatableElements = document.querySelectorAll('[data-lang-en]');
+
+    const setLanguage = (lang) => {
+        // Fade out all elements
+        translatableElements.forEach(el => {
+            el.style.opacity = '0';
+        });
+        
+        // Wait for the fade-out to finish, then change text and fade in
+        setTimeout(() => {
+            translatableElements.forEach(el => {
+                const key = 'lang' + lang.charAt(0).toUpperCase() + lang.slice(1);
+                if (el.dataset[key]) {
+                   el.innerText = el.dataset[key];
+                }
+                el.style.opacity = '1';
+            });
+        }, 200);
+
+        localStorage.setItem('language', lang);
+        
+        langButtons.forEach(btn => {
+            btn.classList.toggle('active', btn.dataset.lang === lang);
+        });
+    };
+
+    langButtons.forEach(button => {
+        button.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (!button.classList.contains('active')) {
+                setLanguage(button.dataset.lang);
+            }
+        });
+    });
+
+    // On page load, check for saved language and set it without animation
+    const savedLang = localStorage.getItem('language') || 'en';
+    translatableElements.forEach(el => {
+        const key = 'lang' + savedLang.charAt(0).toUpperCase() + savedLang.slice(1);
+        if (el.dataset[key]) {
+            el.innerText = el.dataset[key];
+        }
+    });
+    langButtons.forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.lang === savedLang);
     });
 });
