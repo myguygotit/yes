@@ -133,10 +133,15 @@ h3 { font-size: 1.5rem; }
 .nav-container { display: flex; justify-content: space-between; align-items: center; }
 .nav-logo img { height: 40px; }
 .nav-logo {
-    font-size: 18px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: 900;
+    font-size: 24px;      /* This is the new, more balanced size */
+    color: var(--primary-green);
+    text-decoration: none;
     line-height: 1;
 }
-
 .menu-toggle {
     display: none;
     height: 24px;
@@ -346,4 +351,5 @@ body[data-theme="dark"] .staff-info p { color: #888; }
     .hero-grid { grid-template-columns: 1.2fr 1fr; text-align: left; }
     .staff-card-content { flex-direction: row; text-align: left; }
 }
+
 
