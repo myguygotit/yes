@@ -54,6 +54,7 @@ h2::after {
 }
 h3 { font-size: 1.5rem; }
 p { margin-bottom: 1rem; color: #495057; }
+[data-lang-en] { transition: opacity 0.3s ease-in-out; } /* Language fade animation */
 
 /* -- C: Enhanced Buttons -- */
 .btn {
@@ -105,7 +106,7 @@ p { margin-bottom: 1rem; color: #495057; }
 .nav-logo img { height: 40px; }
 .menu-toggle { display: none; font-size: 1.8rem; cursor: pointer; color: var(--primary-green); }
 .nav-links { list-style: none; display: flex; align-items: center; }
-.nav-links li { margin-left: 35px; }
+.nav-links li { margin-left: 25px; }
 .nav-links a {
     color: var(--text-color-dark);
     text-decoration: none;
@@ -123,6 +124,28 @@ p { margin-bottom: 1rem; color: #495057; }
     transition: width 0.3s ease;
 }
 .nav-links a:hover::after { width: 100%; }
+.lang-switcher {
+    display: flex;
+    align-items: center;
+    background-color: var(--light-bg);
+    border: 1px solid var(--border-color);
+    border-radius: 5px;
+    padding: 5px;
+}
+.lang-switcher .lang-btn {
+    padding: 3px 8px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    border-radius: 3px;
+    font-weight: 700;
+}
+.lang-switcher .lang-btn.active {
+    background-color: var(--primary-green);
+    color: var(--text-color-light);
+}
+.lang-switcher .lang-btn:not(.active):hover { background-color: #ddd; }
+.lang-switcher span { margin: 0 5px; color: #ccc; }
+.nav-links .lang-switcher a::after { display: none; }
 
 /* -- E: Hero Section -- */
 .hero {
@@ -140,14 +163,6 @@ p { margin-bottom: 1rem; color: #495057; }
     font-size: 3.5rem;
     color: var(--text-color-light);
     margin-bottom: 1rem;
-    /* Styles for the letter animation */
-    display: inline-block;
-    overflow: hidden;
-}
-.hero-text h1 .char {
-    display: inline-block;
-    transform: translateY(115%);
-    transition: transform 0.5s cubic-bezier(0.215, 0.61, 0.355, 1);
 }
 .hero-text .sub-heading {
     font-size: 1.3rem;
@@ -186,9 +201,25 @@ p { margin-bottom: 1rem; color: #495057; }
 /* -- G: Specialized Sections -- */
 #divisions, #staff { background-color: #fff; }
 .division-card { padding: 0; text-align: center; }
-.division-card img { width: 100%; height: 220px; object-fit: cover; }
+.division-image-wrapper { position: relative; overflow: hidden; border-radius: 3px 3px 0 0; }
+.division-card img { width: 100%; height: 220px; object-fit: cover; transition: transform 0.4s ease; }
+.division-card:hover img { transform: scale(1.1); }
+.division-overlay {
+    position: absolute; top: 0; left: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(26, 46, 39, 0.6);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2rem;
+    opacity: 0;
+    transition: opacity 0.4s ease;
+}
+.division-card:hover .division-overlay { opacity: 1; }
 .division-card-content { padding: 25px; }
 .division-card h4 { margin-bottom: 10px; }
+
 .staff-card-content {
     display: flex;
     flex-direction: column;
@@ -207,9 +238,8 @@ p { margin-bottom: 1rem; color: #495057; }
 .staff-info p { margin-bottom: 15px; font-style: italic; color: #6c757d; }
 
 /* -- H: Animations & Preloader -- */
-.hidden { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
+.hidden { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease-out, transform 0.6s ease-out; }
 .visible { opacity: 1; transform: translateY(0); }
-
 .preloader {
     position: fixed; top: 0; left: 0;
     width: 100%; height: 100%;
@@ -271,6 +301,7 @@ p { margin-bottom: 1rem; color: #495057; }
 @media (max-width: 992px) {
     .hero-text h1 { font-size: 2.8rem; }
     .nav-logo span { display: none; }
+    .nav-links li { margin-left: 20px; }
 }
 @media (max-width: 768px) {
     .menu-toggle { display: block; }
