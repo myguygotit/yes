@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded', function() {
     
     // --- CONFIGURATION ---
     // To disable the language switcher, change this value to false
-    const languageFeatureEnabled = false;
+    const languageFeatureEnabled = true;
 
     // --- 1. PRELOADER ---
     const preloader = document.querySelector('.preloader');
@@ -33,10 +33,12 @@ document.addEventListener('DOMContentLoaded', function() {
         setTheme(savedTheme);
     } else if (prefersDark) {
         setTheme('dark');
+    } else {
+        setTheme('light'); // Default to light if no preference
     }
 
     // --- 3. LANGUAGE SWITCHER ---
-    const langSwitches = document.querySelectorAll('.lang-switch');
+    const langSwitchContainers = document.querySelectorAll('.lang-switch');
     
     if (languageFeatureEnabled) {
         const langToggles = document.querySelectorAll('.lang-toggle-checkbox');
@@ -77,7 +79,7 @@ document.addEventListener('DOMContentLoaded', function() {
         setLanguage(savedLang, true);
 
     } else {
-        langSwitches.forEach(s => s.style.display = 'none');
+        langSwitchContainers.forEach(s => s.style.display = 'none');
     }
 
     // --- 4. MOBILE MENU ---
@@ -112,4 +114,3 @@ document.addEventListener('DOMContentLoaded', function() {
         backToTopButton.classList.toggle('visible', window.scrollY > 300);
     });
 });
-
